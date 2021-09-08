@@ -6,16 +6,16 @@ import EmptyState from "@/components/EmptyState";
 import SiteTableSkeleton from "@/components/SiteTableSkeleton";
 import DashboardShell from "@/components/DashboardShell";
 import useSWR from "swr";
-import fetcher from "../utils/fetcher";
 import FeedbackTable from "@/components/FeedbackTable";
 import FeedbackTableHeader from "@/components/FeedbackTableHeader";
 import FeedbackEmptyState from "@/components/FeedbackEmptyState";
 import Page from "@/components/Page";
+import fetcher from "../../utils/fetcher";
 
 
 // import {useAuth} from "@/lib/auth";
 
-const MyFeedback = () => {
+const SiteFeedback = () => {
     const { user } = useAuth();
     const { data, error } = useSWR(user ? ['/api/feedback', user.token] : null, fetcher);
     console.log(data);
@@ -55,11 +55,11 @@ const MyFeedback = () => {
     );
 };
 
-const MyFeedbackPage = () => (
+const SiteFeedbackPage = () => (
     <Page name="Name of the site feedback" path="/feedback">
-        <MyFeedback />
+        <SiteFeedback />
     </Page>
 );
 
 
-export default MyFeedbackPage;
+export default SiteFeedbackPage;
