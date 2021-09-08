@@ -8,16 +8,11 @@ const FeedbackTableHeader = ({siteName}) => {
         <>
             <Breadcrumb>
                 <BreadcrumbItem isCurrentPage>
-                    <NextLink href="/feedback"  passHref>
-                        <Link color="teal.500">View Feedback</Link>
-                    </NextLink>
-s                </BreadcrumbItem>
-                <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink color="gray.700" fontSize="sm">{siteName || '-'}</BreadcrumbLink>
+                    <BreadcrumbLink color="gray.700" fontSize="sm">Feedback</BreadcrumbLink>
                 </BreadcrumbItem>
             </Breadcrumb>
             <Flex >
-                <Heading flexGrow="1" mb={4}>{siteName || '-'}</Heading>
+                <Heading flexGrow="1" mb={4}>All Feedback</Heading>
             </Flex>
         </>
     );
