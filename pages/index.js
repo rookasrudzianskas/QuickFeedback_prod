@@ -34,7 +34,7 @@ export default function Home({ allFeedback, site }) {
 
 
     const GoToDashboard = () => {
-        router.push('/dashboard');
+        router.push('/sites');
     }
 
   return (
@@ -44,7 +44,7 @@ export default function Home({ allFeedback, site }) {
                   <Head>
                       <script dangerouslySetInnerHTML={{ __html: `
                   if (document.cookie && document.cookie.includes('quick-feedback-auth')) {
-                    window.location.href = "/dashboard"
+                    window.location.href = "/sites"
                   }
                 ` }} />
                   </Head>
@@ -60,7 +60,7 @@ export default function Home({ allFeedback, site }) {
                       <Button
                           as="a"
                           // onClick={GoToDashboard}
-                          href="/dashboard"
+                          href="/sites"
                           backgroundColor="gray.900"
                           color="white"
                           fontWeight="medium"

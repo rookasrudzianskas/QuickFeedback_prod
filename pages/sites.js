@@ -41,7 +41,7 @@ const Sites = () => {
 
     if(data.sites.length) {
         return (
-            <DashboardShell overflow="hidden">
+            <DashboardShell>
                 <SiteTableHeader />
                 <SiteTable sites={data.sites} />
             </DashboardShell>
@@ -51,7 +51,7 @@ const Sites = () => {
     return (
         <>
 
-            <DashboardShell overflow="hidden">
+            <DashboardShell>
                 <SiteTableHeader isPaidAccount={isPaidAccount} />
                 {/*<UpgradeEmptyState />*/}
                 {isPaidAccount ? <EmptyState /> : <UpgradeEmptyState />}
