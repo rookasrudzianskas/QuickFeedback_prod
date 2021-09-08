@@ -9,6 +9,7 @@ import useSWR from "swr";
 import fetcher from "../utils/fetcher";
 import FeedbackTable from "@/components/FeedbackTable";
 import FeedbackTableHeader from "@/components/FeedbackTableHeader";
+import FeedbackEmptyState from "@/components/FeedbackEmptyState";
 
 
 // import {useAuth} from "@/lib/auth";
@@ -42,7 +43,11 @@ const Feedback = () => {
 
                 <FeedbackTableHeader />
 
-                {data?.feedback ? <FeedbackTable allFeedback={data.feedback} /> : <EmptyState />}
+                {data?.feedback?.length ? (
+                    <FeedbackTable feedback={data.feedback} />
+                ) : (
+                    <FeedbackEmptyState />
+                )}
             </DashboardShell>
 
         </>
