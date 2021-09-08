@@ -14,24 +14,24 @@ const FeedbackRow = ({ id, author, text, route, status }) => {
     // console.log("This is feedback");
     const auth = useAuth();
 
-    const toggleFeedback = (e) => {
+    const toggleFeedback = async() => {
         // setChecked(!checked);
-        updateFeedback(id, {status: !checked ? 'active' : 'pending'})
-        mutate(['api/feedback', auth.user.token],
-            async (data) => {
-
-            const updatedFeedback = data.feedback.find((feedback) => feedback.id === id);
-
-            const allOtherFeedback = data.feedback.filter((feedback) => feedback.id !== id);
-                updatedFeedback.status = !checked;
-
-                return { feedback: [updatedFeedback, ...allOtherFeedback]
-                };
-            },
-            false
-        );
+        await updateFeedback(id, {status: !checked ? 'active' : 'pending'})
+        mutate(['api/feedback', auth.user.token]);
+        //     async (data) => {
+        //
+        //     const updatedFeedback = data.feedback.find((feedback) => feedback.id === id);
+        //
+        //     const allOtherFeedback = data.feedback.filter((feedback) => feedback.id !== id);
+        //         updatedFeedback.status = !checked;
+        //
+        //         return { feedback: [updatedFeedback, ...allOtherFeedback]
+        //         };
+        //     },
+        //     false
+        // );
         // console.log(checked, id)
-    }
+    };
 
     return (
         <Box key={id} as="tr">
