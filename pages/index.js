@@ -10,7 +10,7 @@ import Feedback from "@/components/Feedback";
 
 // import {useAuth} from "@/lib/auth";
 
-const SITE_ID = 'MWiWRZN1PrAkdqdxDtAE';
+const SITE_ID = 'qkDaDRmoIkyIgKxeq39p';
 
 
 export async function getStaticProps(context) {
