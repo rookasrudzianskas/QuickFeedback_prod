@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     if(error) {
         res.status(500).json({ error: error });
     }
-    res.status(200).json({ feedback });
+    res.status(200).json({ feedback, site });
 
 };
 
