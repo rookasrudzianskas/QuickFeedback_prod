@@ -57,7 +57,7 @@ const Sites = () => {
             <DashboardShell>
                 <SiteTableHeader isPaidAccount={isPaidAccount} />
                 {/*<UpgradeEmptyState />*/}
-                {(isTheStripeRoleStarter === 'starter' || isTheStripeRoleStarter === 'premium'  )? <EmptyState /> : <UpgradeEmptyState />}
+                {isPaidAccount ? <EmptyState /> : <UpgradeEmptyState />}
             </DashboardShell>
 
         </>
