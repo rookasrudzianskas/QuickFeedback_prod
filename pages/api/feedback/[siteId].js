@@ -8,6 +8,7 @@ export default async function handler(req, res) {
     const { feedback, error } = await getAllFeedback(siteId);
     const { site } = await getSite(siteId);
 
+
     if(error) {
         res.status(500).json({ error: error });
     }
