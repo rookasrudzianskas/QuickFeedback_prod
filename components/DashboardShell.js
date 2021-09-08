@@ -53,7 +53,7 @@ const DashboardShell = ({children}) => {
                             <NextLink href={'/'} passHref>
                                 <Icon mr={4} name="logo" color="black" size="24px"/>
                             </NextLink>
-                            <NextLink href={'/dashboard'} passHref>
+                            <NextLink href={'/sites'} passHref>
                                 <Link>Sites</Link>
                                 </NextLink>
 

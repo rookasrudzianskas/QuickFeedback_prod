@@ -15,7 +15,7 @@ import Page from "@/components/Page";
 
 // import {useAuth} from "@/lib/auth";
 
-const Dashboard = () => {
+const Sites = () => {
     const { user } = useAuth();
     const { data, error } = useSWR(user ? ['/api/sites', user.token] : null, fetcher);
     const isPaidAccount = user?.stripeRole;
@@ -64,7 +64,7 @@ const Dashboard = () => {
 const DashboardPage = () => {
     return (
         <Page name="Dashboard" path="/dashboard">
-            <Dashboard />
+            <Sites />
         </Page>
     )
 }
