@@ -17,7 +17,7 @@ import fetcher from "../../utils/fetcher";
 
 const SiteFeedback = () => {
     const { user } = useAuth();
-    const { data, error } = useSWR(user ? ['/api/feedback', user.token] : null, fetcher);
+    const { data, error } = useSWR(user ? [`/api/feedback/${}`, user.token] : null, fetcher);
     console.log(data);
     if(!data) {
         return (
