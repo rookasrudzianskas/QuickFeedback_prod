@@ -40,7 +40,7 @@ const DashboardShell = ({children}) => {
 
     return  (
         <>
-            <Flex flexDirection="column">
+            <Flex flexDirection="column" minHeight="100vh">
                 <Box as='header' sx={{ position: '-webkit-sticky', /* Safari */ top: '0', }}>
 
                 <Flex
