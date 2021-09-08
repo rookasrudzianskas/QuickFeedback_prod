@@ -10,12 +10,11 @@ import fetcher from "../utils/fetcher";
 import FeedbackTable from "@/components/FeedbackTable";
 import FeedbackTableHeader from "@/components/FeedbackTableHeader";
 import FeedbackEmptyState from "@/components/FeedbackEmptyState";
-import Page from "@/components/Page";
 
 
 // import {useAuth} from "@/lib/auth";
 
-const AllFeedback = () => {
+const Feedback = () => {
     const { user } = useAuth();
     const { data, error } = useSWR(user ? ['/api/feedback', user.token] : null, fetcher);
     console.log(data);
@@ -55,11 +54,5 @@ const AllFeedback = () => {
     );
 };
 
-const AllFeedbackPage = () => (
-    <Page name="All Feedback" path="/feedback">
-        <AllFeedback />
-    </Page>
-);
 
-
-export default AllFeedbackPage;
+export default Feedback;
