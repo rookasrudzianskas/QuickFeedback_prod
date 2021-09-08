@@ -44,7 +44,7 @@ const Feedback = () => {
                 <FeedbackTableHeader />
 
                 {data?.feedback?.length ? (
-                    <FeedbackTable feedback={data.feedback} />
+                    <FeedbackTable allFeedback={data.feedback} />
                 ) : (
                     <FeedbackEmptyState />
                 )}

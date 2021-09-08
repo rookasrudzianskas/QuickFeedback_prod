@@ -9,6 +9,7 @@ import FeedbackRow from "@/components/FeedbackRow";
 const FeedbackTable = ({ allFeedback }) => {
 
 
+    console.log("This is all feedback", allFeedback)
     // console.log("This is feedback");
 
     const toggleFeedback = (e) => {
