@@ -17,7 +17,15 @@ const FeedbackRow = ({ id, author, text, route, status }) => {
     const toggleFeedback = (e) => {
         setChecked(!checked);
         updateFeedback(id, {status: !checked ? 'active' : 'pending'})
-        mutate(['api/feedback', auth.user.token]);
+        mutate(['api/feedback', auth.user.token],
+            async (data) => {
+            const currentFeedback = data.feedback.find((feedback) => feedback.id === id);
+            currentFeedback.status = !checked;
+
+                return { feedback: data.feedback.filter((feedback) => feedback.id !== feedbackId) };
+            },
+            false
+        );
         // console.log(checked, id)
     }
 
