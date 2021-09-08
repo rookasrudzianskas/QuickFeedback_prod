@@ -19,7 +19,7 @@ const GlobalStyle = ({ children }) => {
                       html {
                         scroll-behavior: smooth;
                         min-width: 360px;
-                        background-color: #E4E9ED;
+                        background-color: #edf2f7;
                       }
 
                       #__next {
@@ -28,7 +28,7 @@ const GlobalStyle = ({ children }) => {
                         max-height: 100%;
                         background-color: #E4E9ED;
                          //background-color: #184a7d;
-                        overflow: auto;
+                        overflow: hidden;
                       }
                     `}
                 />
