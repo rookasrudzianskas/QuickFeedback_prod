@@ -20,7 +20,7 @@ const SiteFeedback = () => {
     const { user } = useAuth();
     const { query } = useRouter();
     const { data, error } = useSWR(user ? [`/api/feedback/${query.siteId}`, user.token] : null, fetcher);
-    console.log("This is quite well", data.site.name);
+    // console.log("This is quite well", data.site.name);
 
     if(!data) {
         return (
