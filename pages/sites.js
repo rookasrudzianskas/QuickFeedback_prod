@@ -20,7 +20,7 @@ const Sites = () => {
     // const {data} = null;
     const { data, error } = useSWR(user ? ['/api/sites', user.token] : null, fetcher);
 
-    const isPaidAccounts = user?.stripeRole;
+    const isPaidAccount = user?.stripeRole;
 
     // console.log(data);
     if(!data) {
@@ -54,7 +54,7 @@ const Sites = () => {
         <>
 
             <DashboardShell>
-                <SiteTableHeader isPaidAccount={isPaidAccounts} />
+                <SiteTableHeader isPaidAccount={isPaidAccount} />
                 {/*<UpgradeEmptyState />*/}
                 {isPaidAccount ? <EmptyState /> : <UpgradeEmptyState />}
             </DashboardShell>
