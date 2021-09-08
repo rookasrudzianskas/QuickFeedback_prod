@@ -16,6 +16,7 @@ const FeedbackRow = ({ id, author, text, route, status }) => {
 
     const toggleFeedback = async() => {
         // setChecked(!checked);
+        // console.log(status, id);
         await updateFeedback(id, {status: !checked ? 'active' : 'pending'})
         mutate(['api/feedback', auth.user.token]);
         //     async (data) => {
@@ -48,7 +49,7 @@ const FeedbackRow = ({ id, author, text, route, status }) => {
             <Td>
                 <Switch
                     onChange={toggleFeedback}
-                    isChecked={checked}
+                    isChecked={status === 'active'}
                     variantColor="green"
                     size="md"
                 />
