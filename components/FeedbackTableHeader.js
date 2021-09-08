@@ -1,14 +1,17 @@
 import React from 'react';
-import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, Flex, Heading} from "@chakra-ui/core";
+import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, Flex, Heading, Link} from "@chakra-ui/core";
 import AddSiteModal from "@/components/AddSiteModal";
+import NextLink from "next/link";
 
 const FeedbackTableHeader = ({siteName}) => {
     return (
         <>
             <Breadcrumb>
                 <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink color="gray.700" fontSize="sm">Feedback</BreadcrumbLink>
-                </BreadcrumbItem>
+                    <NextLink href="/feedback"  passHref>
+                        <Link color="teal.500">View Feedback</Link>
+                    </NextLink>
+s                </BreadcrumbItem>
                 <BreadcrumbItem isCurrentPage>
                     <BreadcrumbLink color="gray.700" fontSize="sm">{siteName || '-'}</BreadcrumbLink>
                 </BreadcrumbItem>
