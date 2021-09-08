@@ -24,7 +24,7 @@ const SiteFeedback = () => {
     if(!data) {
         return (
             <DashboardShell>
-                <FeedbackTableHeader />
+                <FeedbackTableHeader siteName="Test site" />
                 <SiteTableSkeleton />
             </DashboardShell>
         )
@@ -33,7 +33,7 @@ const SiteFeedback = () => {
     if(!user) {
         return (
             <DashboardShell>
-                <FeedbackTableHeader />
+                <FeedbackTableHeader  siteName="Test site" />
                 <SiteTableSkeleton />
             </DashboardShell>
         )
@@ -44,7 +44,7 @@ const SiteFeedback = () => {
 
             <DashboardShell overflow="hidden">
 
-                <FeedbackTableHeader />
+                <FeedbackTableHeader  siteName="Test site" />
 
                 {data?.feedback?.length ? (
                     <FeedbackTable allFeedback={data.feedback} />
