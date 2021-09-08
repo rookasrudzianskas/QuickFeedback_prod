@@ -52,8 +52,8 @@ const SiteFeedback = ({ initialFeedback }) => {
                     // alignItems="center"
                     flexDirection="column"
                     width="full"
-                    maxWidth="700px"
-                    margin="0 auto"
+                    // maxWidth="700px"
+                    // margin="0 auto"
                 >
 
                     <Box as="form" onSubmit={onSubmit}>
