@@ -9,7 +9,7 @@ import {useAuth} from "@/lib/auth";
 
 const FeedbackRow = ({ id, author, text, route, status }) => {
 
-    const [checked, setChecked] = useState(status === 'active');
+    const isChecked = status === 'active';
 
     // console.log("This is feedback");
     const auth = useAuth();
@@ -17,8 +17,8 @@ const FeedbackRow = ({ id, author, text, route, status }) => {
     const toggleFeedback = async() => {
         // setChecked(!checked);
         // console.log(status, id);
-        await updateFeedback(id, {status: !checked ? 'active' : 'pending'})
-        mutate(['api/feedback', auth.user.token]);
+        await updateFeedback(id, { status: isChecked ? 'pending' : 'active' });
+        mutate(['/api/feedback', auth.user.token]);
         //     async (data) => {
         //
         //     const updatedFeedback = data.feedback.find((feedback) => feedback.id === id);
@@ -49,7 +49,7 @@ const FeedbackRow = ({ id, author, text, route, status }) => {
             <Td>
                 <Switch
                     onChange={toggleFeedback}
-                    isChecked={status === 'active'}
+                    isChecked={isChecked}
                     variantColor="green"
                     size="md"
                 />
