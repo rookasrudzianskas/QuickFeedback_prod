@@ -21,10 +21,11 @@ const SiteFeedback = () => {
     const { query } = useRouter();
     const { data, error } = useSWR(user ? [`/api/feedback/${query.siteId}`, user.token] : null, fetcher);
     console.log(data);
+
     if(!data) {
         return (
             <DashboardShell>
-                <FeedbackTableHeader siteName="Test site" />
+                <FeedbackTableHeader siteName={data.site.name}/>
                 <SiteTableSkeleton />
             </DashboardShell>
         )
@@ -33,7 +34,7 @@ const SiteFeedback = () => {
     if(!user) {
         return (
             <DashboardShell>
-                <FeedbackTableHeader  siteName="Test site" />
+                <FeedbackTableHeader  siteName={data.site.name} />
                 <SiteTableSkeleton />
             </DashboardShell>
         )
@@ -44,7 +45,7 @@ const SiteFeedback = () => {
 
             <DashboardShell overflow="hidden">
 
-                <FeedbackTableHeader  siteName="Test site" />
+                <FeedbackTableHeader  siteName={data.site.name} />
 
                 {data?.feedback?.length ? (
                     <FeedbackTable allFeedback={data.feedback} />
