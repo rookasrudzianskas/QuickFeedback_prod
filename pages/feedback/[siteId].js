@@ -12,6 +12,7 @@ import FeedbackEmptyState from "@/components/FeedbackEmptyState";
 import Page from "@/components/Page";
 import fetcher from "../../utils/fetcher";
 import {useRouter} from "next/router";
+import SiteFeedbackTableHeader from "@/components/SiteFeedbackTableHeader";
 
 
 // import {useAuth} from "@/lib/auth";
@@ -25,7 +26,7 @@ const SiteFeedback = () => {
     if(!data) {
         return (
             <DashboardShell>
-                <FeedbackTableHeader siteName={data?.site?.name}  />
+                <SiteFeedbackTableHeader siteName={data?.site?.name}  />
                 <SiteTableSkeleton />
             </DashboardShell>
         )
@@ -34,7 +35,7 @@ const SiteFeedback = () => {
     if(!user) {
         return (
             <DashboardShell>
-                <FeedbackTableHeader siteName={data?.site?.name}   />
+                <SiteFeedbackTableHeader siteName={data?.site?.name}   />
                 <SiteTableSkeleton />
             </DashboardShell>
         )
@@ -44,7 +45,7 @@ const SiteFeedback = () => {
         <>
             <DashboardShell overflow="hidden">
 
-                <FeedbackTableHeader siteName={data?.site?.name}   />
+                <SiteFeedbackTableHeader siteName={data?.site?.name}   />
 
                 {data?.feedback?.length ? (
                     <FeedbackTable allFeedback={data.feedback} />
