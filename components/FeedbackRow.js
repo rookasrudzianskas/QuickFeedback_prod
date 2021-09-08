@@ -28,7 +28,7 @@ const FeedbackRow = ({ id, author, text, route, status }) => {
                 return { feedback: [updatedFeedback, ...allOtherFeedback]
                 };
             },
-            true
+            false
         );
         // console.log(checked, id)
     }
