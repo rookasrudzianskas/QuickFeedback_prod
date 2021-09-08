@@ -19,8 +19,10 @@ const FeedbackRow = ({ id, author, text, route, status }) => {
         updateFeedback(id, {status: !checked ? 'active' : 'pending'})
         mutate(['api/feedback', auth.user.token],
             async (data) => {
+
             const updatedFeedback = data.feedback.find((feedback) => feedback.id === id);
-            const allOtherFeedback = data.feedback.filter((feedback) => feedback.id !== id)
+
+            const allOtherFeedback = data.feedback.filter((feedback) => feedback.id !== id);
                 updatedFeedback.status = !checked;
 
                 return { feedback: [updatedFeedback, ...allOtherFeedback]
