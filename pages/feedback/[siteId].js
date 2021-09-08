@@ -42,7 +42,6 @@ const SiteFeedback = () => {
 
     return (
         <>
-
             <DashboardShell overflow="hidden">
 
                 <FeedbackTableHeader siteName={data?.site?.name}   />
