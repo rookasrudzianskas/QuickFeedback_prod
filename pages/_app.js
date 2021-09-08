@@ -16,18 +16,20 @@ const GlobalStyle = ({ children }) => {
             <CSSReset />
                 <Global
                     styles={css`
-              html {
-                scroll-behavior: smooth;
-                min-width: 360px;
-                background-color: #edf2f7;
-              }
-              #__next {
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-                overflow: auto;
-              }
-            `}
+                      html {
+                        scroll-behavior: smooth;
+                        min-width: 360px;
+                        background-color: #edf2f7;
+                      }
+
+                      #__next {
+                        display: flex;
+                        flex-direction: column;
+                        min-height: 100vh;
+                        //background-color: #184a7d;
+                        overflow: auto;
+                      }
+                    `}
                 />
             {children}
         </>
