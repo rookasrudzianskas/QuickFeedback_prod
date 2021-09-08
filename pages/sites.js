@@ -18,10 +18,9 @@ import Page from "@/components/Page";
 const Sites = () => {
     const { user } = useAuth();
     // const {data} = null;
-          const { data, error } = useSWR(user ? ['/api/sites', user.token] : null, fetcher);
-    if(!data) {
-    }
-    const isPaidAccount = user?.stripeRole;
+    const { data, error } = useSWR(user ? ['/api/sites', user.token] : null, fetcher);
+
+    const isPaidAccount = user.stripeRole;
 
     // console.log(data);
     if(!data) {
