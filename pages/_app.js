@@ -25,7 +25,7 @@ const GlobalStyle = ({ children }) => {
                       #__next {
                         display: flex;
                         flex-direction: column;
-                        background-color: #E4E9ED;
+                        background-color: #edf2f7;
                         min-height: 100vh;
                          //background-color: #184a7d;
                         overflow: hidden;
