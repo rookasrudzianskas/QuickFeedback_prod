@@ -15,7 +15,7 @@ const FeedbackRow = ({ id, author, text, route, status }) => {
     const auth = useAuth();
 
     const toggleFeedback = (e) => {
-        setChecked(!checked);
+        // setChecked(!checked);
         updateFeedback(id, {status: !checked ? 'active' : 'pending'})
         mutate(['api/feedback', auth.user.token],
             async (data) => {
@@ -28,7 +28,7 @@ const FeedbackRow = ({ id, author, text, route, status }) => {
                 return { feedback: [updatedFeedback, ...allOtherFeedback]
                 };
             },
-            false
+            true
         );
         // console.log(checked, id)
     }
