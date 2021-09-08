@@ -11,13 +11,15 @@ import FeedbackTableHeader from "@/components/FeedbackTableHeader";
 import FeedbackEmptyState from "@/components/FeedbackEmptyState";
 import Page from "@/components/Page";
 import fetcher from "../../utils/fetcher";
+import {useRouter} from "next/router";
 
 
 // import {useAuth} from "@/lib/auth";
 
 const SiteFeedback = () => {
     const { user } = useAuth();
-    const { data, error } = useSWR(user ? [`/api/feedback/${}`, user.token] : null, fetcher);
+    const { query } = useRouter();
+    const { data, error } = useSWR(user ? [`/api/feedback/${query.siteId}`, user.token] : null, fetcher);
     console.log(data);
     if(!data) {
         return (
