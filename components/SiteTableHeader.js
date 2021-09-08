@@ -2,7 +2,9 @@ import React from 'react';
 import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, Flex, Heading} from "@chakra-ui/core";
 import AddSiteModal from "@/components/AddSiteModal";
 
-const SiteTableHeader = ({isPaidAccount}) => {
+const SiteTableHeader = (isPaidAccount) => {
+
+    // console.log("THis is account", isPaidAccount);
     return (
         <>
             <Breadcrumb>
