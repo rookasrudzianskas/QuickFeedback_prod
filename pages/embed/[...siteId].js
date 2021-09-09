@@ -1,4 +1,4 @@
-import {getAllFeedback, getAllSites} from "@/lib/db-admin";
+import {getAllFeedback, getAllSites, getSite} from "@/lib/db-admin";
 import FeedbackLink from "@/components/FeedbackLink";
 import Feedback from "@/components/Feedback";
 import {Box, Button, FormControl, FormHelperText, FormLabel, Input, Text} from "@chakra-ui/core";
@@ -77,35 +77,37 @@ const EmbeddedFeedbackPage = ({ initialFeedback }) => {
         )
     };
 
-    export async function getStaticProps(context) {
 
-        const [siteId, route] = context.params.siteId;
-        const {feedback} = await getAllFeedback(siteId, route);
-
-        return {
-            props: {
-                initialFeedback: feedback,
-            },
-            revalidate: 1
-        };
-    }
-
-    export async function getStaticPaths() {
-        const {sites} = await getAllSites();
-        const paths = sites.map(site => ({
-            params: {
-                siteId: site.id.toString(),
-            }
-        }));
-
-        return {
-            paths,
-            fallback: true
-        };
-    }
 
 }
 export default EmbeddedFeedbackPage;
 
+export async function getStaticProps(context) {
 
+    const [siteId, route] = context.params.site;
+    const { feedback } = await getAllFeedback(siteId, route);
+    const { site } = await getSite(siteId);
+
+    return {
+        props: {
+            initialFeedback: feedback,
+            site,
+        },
+        revalidate: 1
+    };
+}
+
+export async function getStaticPaths() {
+    const { sites } = await getAllSites();
+    const paths = sites.map((site) => ({
+        params: {
+            site: [site.id.toString()]
+        }
+    }));
+
+    return {
+        paths,
+        fallback: true
+    };
+}
 // embed shit
