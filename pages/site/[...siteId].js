@@ -27,6 +27,7 @@ export async function getStaticProps(context) {
 
 export async function getStaticPaths() {
     const { sites } = await getAllSites();
+    // console.log("This sites", sites);
     const paths = sites.map((site) => ({
         params: {
             site: [site.id.toString()]
