@@ -14,7 +14,7 @@ import UpgradeEmptyState from "@/components/UpgradeEmptyState";
 import DashboardShell from "@/components/DashboardShell";
 import {useTheme} from "../../utils/useTheme";
 
-const EmbeddedFeedbackPage = ({ initialFeedback }) => {
+const EmbeddedFeedbackPage = ({ initialFeedback, site } ) => {
 
     const auth = useAuth();
     const router = useRouter();
