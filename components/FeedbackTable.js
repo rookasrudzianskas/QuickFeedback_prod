@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Code, IconButton, Link, Skeleton, Switch} from '@chakra-ui/core';
 import { Table, Tr, Th, Td } from './Table';
-import RemoveButton from "@/components/RemoveButton";
+import DeleteFeedbackButton from "@/components/DeleteFeedbackButton";
 import {useRouter} from "next/router";
 import FeedbackRow from "@/components/FeedbackRow";
 
