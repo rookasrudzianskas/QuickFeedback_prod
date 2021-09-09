@@ -18,7 +18,6 @@ export default function FeedbackLink({ paths }) {
             direction={['column', 'row']}
         >
             <Link
-                color={linkColor[colorMode]}
                 fontWeight="bold"
                 fontSize="sm"
                 href={`/site/${paths.join('/')}`}
