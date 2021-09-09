@@ -1,4 +1,3 @@
-
 import { useRef, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Box, FormControl, Textarea, Button } from '@chakra-ui/core';
