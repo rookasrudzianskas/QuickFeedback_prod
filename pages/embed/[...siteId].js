@@ -1,7 +1,7 @@
 import {getAllFeedback, getAllSites} from "@/lib/db-admin";
 import FeedbackLink from "@/components/FeedbackLink";
 import Feedback from "@/components/Feedback";
-import {Box, Button, FormControl, FormHelperText, FormLabel, Input} from "@chakra-ui/core";
+import {Box, Button, FormControl, FormHelperText, FormLabel, Input, Text} from "@chakra-ui/core";
 import {useAuth} from "@/lib/auth";
 import {useRouter} from "next/router";
 import {useRef, useState} from "react";
@@ -12,8 +12,9 @@ import SiteTableHeader from "@/components/SiteTableHeader";
 import EmptyState from "@/components/EmptyState";
 import UpgradeEmptyState from "@/components/UpgradeEmptyState";
 import DashboardShell from "@/components/DashboardShell";
+import {useTheme} from "../../utils/useTheme";
 
-const SiteFeedback = ({ initialFeedback }) => {
+const EmbeddedFeedbackPage = ({ initialFeedback }) => {
 
     const auth = useAuth();
     const router = useRouter();
@@ -21,7 +22,6 @@ const SiteFeedback = ({ initialFeedback }) => {
     const [allFeedback, setAllFeedback] = useState(initialFeedback);
     const [value, setValue] = useState("");
     const handleChange = (event) => setValue(event.target.value)
-
 
 
     const onSubmit = (e) => {
@@ -44,76 +44,68 @@ const SiteFeedback = ({ initialFeedback }) => {
 
     // console.log(allFeedback);
 
-    return (
-        <>
+    const EmbeddedFeedbackPage = ({initialFeedback, site}) => {
+        const router = useRouter();
+        const colorMode = useTheme();
+        const textColor = {
+            light: 'gray.900',
+            dark: 'gray.200'
+        };
 
-                <Box
-                    display="flex"
-                    // alignItems="center"
-                    flexDirection="column"
-                    width="full"
-                    // maxWidth="700px"
-                    // margin="0 auto"
-                >
+        return (
+            <>
 
-                    <Box as="form" onSubmit={onSubmit}>
-                        <FormControl my={8} id="comment">
-                            <FormLabel>Comment</FormLabel>
-                            <Input placeholder="Leave the comment" value={value} onChange={handleChange} ref={inputEl} type="comment" id="comment" />
-                            <Button
-                                type="submit"
-                                isDisabled={router.isFallback}
-                                backgroundColor="gray.900"
-                                color="white"
-                                fontWeight="medium"
-                                mt={4}
-                                _hover={{ bg: 'gray.700' }}
-                                _active={{
-                                    bg: 'gray.800',
-                                    transform: 'scale(0.95)'
-                                }}
-                            >
-                                Leave Feedback
-                            </Button>
-                        </FormControl>
-                    </Box>
-
-                    {allFeedback?.map((feedback) => (
-                        <Feedback key={feedback.createdAt} {...feedback} />
-                    ))}
+                <Box display="flex" flexDirection="column" width="full">
+                    <FeedbackLink paths={router?.query?.site || []}/>
+                    {initialFeedback?.length ? (
+                        initialFeedback.map((feedback, index) => (
+                            <Feedback
+                                key={feedback.id}
+                                settings={site?.settings}
+                                isLast={index === initialFeedback.length - 1}
+                                {...feedback}
+                            />
+                        ))
+                    ) : (
+                        <Text color={textColor[colorMode]}>
+                            There are no comments for this site.
+                        </Text>
+                    )}
                 </Box>
 
-        </>
-    )
-};
-
-export async function getStaticProps(context) {
-
-    const [siteId, route] = context.params.siteId;
-    const { feedback } = await getAllFeedback(siteId, route);
-
-    return {
-        props: {
-            initialFeedback: feedback,
-        },
-        revalidate: 1
+            </>
+        )
     };
+
+    export async function getStaticProps(context) {
+
+        const [siteId, route] = context.params.siteId;
+        const {feedback} = await getAllFeedback(siteId, route);
+
+        return {
+            props: {
+                initialFeedback: feedback,
+            },
+            revalidate: 1
+        };
+    }
+
+    export async function getStaticPaths() {
+        const {sites} = await getAllSites();
+        const paths = sites.map(site => ({
+            params: {
+                siteId: site.id.toString(),
+            }
+        }));
+
+        return {
+            paths,
+            fallback: true
+        };
+    }
+
 }
+export default EmbeddedFeedbackPage;
 
-export async function getStaticPaths() {
-    const {sites} = await getAllSites();
-    const paths = sites.map(site => ({
-        params: {
-            siteId: site.id.toString(),
-        }
-    }));
-
-    return {
-        paths,
-        fallback: true
-    };
-}
-
-export default SiteFeedback;
 
 // embed shit
