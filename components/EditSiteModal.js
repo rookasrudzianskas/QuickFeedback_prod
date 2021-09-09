@@ -17,9 +17,11 @@ import {
 } from '@chakra-ui/core';
 
 import { updateSite } from '@/lib/db';
+import { useAuth } from '@/lib/auth';
 
 const EditSiteModal = ({ settings, siteId, children }) => {
     const toast = useToast();
+    const { user } = useAuth();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { handleSubmit, register } = useForm();
 
@@ -34,8 +36,7 @@ const EditSiteModal = ({ settings, siteId, children }) => {
             duration: 5000,
             isClosable: true
         });
-
-        mutate(`/api/site/${siteId}`);
+        mutate(['/api/sites', user.token]);
         onClose();
     };
 

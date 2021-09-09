@@ -30,6 +30,11 @@ const InitialFocus = ({children}) => {
             createdAt: new Date().toISOString(),
             name,
             url,
+            settings: {
+                icons: true,
+                timestamp: true,
+                ratings: false
+            }
         };
 
         const {id} = createSite(newSite);

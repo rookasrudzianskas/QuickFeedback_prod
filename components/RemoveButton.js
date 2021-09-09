@@ -60,7 +60,7 @@ function RemoveButton({feedbackId}) {
                             <Button ref={cancelRef} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button colorScheme="red" variantColor="red" onClick={onDelete} ml={3}>
+                            <Button fontWeight="bold" variantColor="red" onClick={onDelete} ml={3}>
                                 Delete
                             </Button>
                         </AlertDialogFooter>
