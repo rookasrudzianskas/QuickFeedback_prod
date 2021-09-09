@@ -14,6 +14,7 @@ import EditSiteModal from './EditSiteModal';
 const SiteHeader = ({ isSiteOwner, site, siteId, route }) => {
     const siteName = site?.name;
 
+
     return (
         <Box mx={4}>
             <Breadcrumb>

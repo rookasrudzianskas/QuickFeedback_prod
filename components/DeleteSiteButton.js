@@ -14,7 +14,7 @@ import {
 import { deleteSite } from '@/lib/db';
 import { useAuth } from '@/lib/auth';
 
-const DeleteSitebutton = ({ siteId }) => {
+const DeleteSiteButton = ({ siteId }) => {
     const [isOpen, setIsOpen] = useState();
     const cancelRef = useRef();
     const auth = useAuth();
@@ -75,4 +75,4 @@ const DeleteSitebutton = ({ siteId }) => {
     );
 };
 
-export default DeleteSitebutton;
+export default DeleteSiteButton;
