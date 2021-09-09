@@ -1,10 +1,10 @@
-import {getAllFeedback, getAllSites} from "@/lib/db-admin";
+import {getAllFeedback, getAllSites, getSite} from "@/lib/db-admin";
 import FeedbackLink from "@/components/FeedbackLink";
 import Feedback from "@/components/Feedback";
 import {Box, Button, FormControl, FormHelperText, FormLabel, Input} from "@chakra-ui/core";
 import {useAuth} from "@/lib/auth";
 import {useRouter} from "next/router";
-import {useRef, useState} from "react";
+import { useRef, useState, useEffect } from 'react';
 import {createFeedback} from "@/lib/db";
 import useSWR from "swr";
 import fetcher from "../../utils/fetcher";
@@ -12,6 +12,7 @@ import SiteTableHeader from "@/components/SiteTableHeader";
 import EmptyState from "@/components/EmptyState";
 import UpgradeEmptyState from "@/components/UpgradeEmptyState";
 import DashboardShell from "@/components/DashboardShell";
+import SiteHeader from "@/components/SiteHeader";
 
 const SiteFeedback = ({ initialFeedback }) => {
 
@@ -19,8 +20,11 @@ const SiteFeedback = ({ initialFeedback }) => {
     const router = useRouter();
     const inputEl = useRef(null);
     const [allFeedback, setAllFeedback] = useState(initialFeedback);
-    const [value, setValue] = useState("");
-    const handleChange = (event) => setValue(event.target.value)
+    const [siteId, route] = router.query.site;
+
+    useEffect(() => {
+        setAllFeedback(initialFeedback);
+    }, [initialFeedback]);
 
 
 
@@ -28,9 +32,10 @@ const SiteFeedback = ({ initialFeedback }) => {
         e.preventDefault();
         // console.log('Hello');
         const newFeedback = {
+            siteId,
+            route: route || '/',
             author: auth.user.name,
             authorId: auth.user.uid,
-            siteId: router.query.siteId,
             text: inputEl.current.value,
             createdAt: new Date().toISOString(),
             provider: auth.user.provider,
@@ -38,7 +43,6 @@ const SiteFeedback = ({ initialFeedback }) => {
         };
 
         setAllFeedback([newFeedback, ...allFeedback]);
-        setValue("");
         createFeedback(newFeedback);
     }
 
@@ -47,7 +51,12 @@ const SiteFeedback = ({ initialFeedback }) => {
     return (
         <>
             <DashboardShell>
-
+                <SiteHeader
+                    isSiteOwner={true}
+                    site={site}
+                    siteId={siteId}
+                    route={route}
+                />
                 <Box
                     display="flex"
                     // alignItems="center"
@@ -79,9 +88,15 @@ const SiteFeedback = ({ initialFeedback }) => {
                         </FormControl>
                     </Box>
 
-                    {allFeedback?.map((feedback) => (
-                            <Feedback key={feedback.createdAt} {...feedback} />
-                    ))}
+                    {allFeedback &&
+                                allFeedback.map((feedback, index) => (
+                                <Feedback
+                                key={feedback.id}
+                                settings={site?.settings}
+                                isLast={index === allFeedback.length - 1}
+                            {...feedback}
+                        />
+                        ))}
             </Box>
             </DashboardShell>
 
@@ -91,12 +106,14 @@ const SiteFeedback = ({ initialFeedback }) => {
 
 export async function getStaticProps(context) {
 
-    const siteId = context.params.siteId;
-    const { feedback } = await getAllFeedback(siteId);
+    const [siteId, route] = context.params.site;
+    const { feedback } = await getAllFeedback(siteId, route);
+    const { site } = await getSite(siteId);
 
     return {
         props: {
             initialFeedback: feedback,
+            site
         },
         revalidate: 1
     };
@@ -106,7 +123,7 @@ export async function getStaticPaths() {
     const {sites} = await getAllSites();
     const paths = sites.map(site => ({
         params: {
-            siteId: site.id.toString(),
+            site: [site.id.toString()]
         }
     }));
 
