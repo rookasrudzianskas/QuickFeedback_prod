@@ -20,13 +20,13 @@ export async function getStaticProps(context) {
     return {
         props: {
             allFeedback: feedback,
-            site,
+            site
         },
         revalidate: 1
     };
 }
 
-export default function Home({ allFeedback, site }) {
+const Home = ({ allFeedback, site }) => {
 
     const auth = useAuth();
     const router = useRouter();
@@ -103,4 +103,6 @@ export default function Home({ allFeedback, site }) {
   )
 }
 
+
+export default Home;
 // what's going on?
