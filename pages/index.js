@@ -7,7 +7,7 @@ import Feedback from '@/components/Feedback';
 import FeedbackLink from '@/components/FeedbackLink';
 import LoginButtons from '@/components/LoginButtons';
 
-const SITE_ID = 'yjIaQj1mKtVKqUnU9tb3';
+const SITE_ID = 'qkDaDRmoIkyIgKxeq39p';
 
 export async function getStaticProps(context) {
     const { feedback } = await getAllFeedback(SITE_ID);
@@ -18,7 +18,7 @@ export async function getStaticProps(context) {
             allFeedback: feedback,
             site
         },
-        unstable_revalidate: 1
+        revalidate: 1
     };
 }
 
@@ -33,7 +33,7 @@ const Home = ({ allFeedback, site }) => {
                         <script
                             dangerouslySetInnerHTML={{
                                 __html: `
-              if (document.cookie && document.cookie.includes('fast-feedback-auth')) {
+              if (document.cookie && document.cookie.includes('quick-feedback-auth')) {
                 window.location.href = "/sites"
               }
             `
@@ -43,16 +43,9 @@ const Home = ({ allFeedback, site }) => {
                     <Icon color="black" name="logo" size="48px" mb={2} />
                     <Text mb={4} fontSize="lg" py={4}>
                         <Text as="span" fontWeight="bold" display="inline">
-                            Fast Feedback
+                            Quick Feedback
+
                         </Text>
-                        {' is being built as part of '}
-                        <Link
-                            href="https://react2025.com"
-                            isExternal
-                            textDecoration="underline"
-                        >
-                            React 2025
-                        </Link>
                         {`. It's the easiest way to add comments or reviews to your static site. It's still a work-in-progress, but you can try it out by logging in.`}
                     </Text>
                     {auth.user ? (
